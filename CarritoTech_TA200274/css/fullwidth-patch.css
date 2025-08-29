@@ -1,0 +1,45 @@
+/* ZonaTech – Parche de diseño full‑width (no toca tu JS)
+   - Amplía el contenedor
+   - Catalogo más ancho
+   - Carrito sticky en desktop
+*/
+:root{ --zt-container-max: 1800px; }
+
+/* Si tu layout usa una envolvente principal, ensánchala */
+.wrap, .container, .contenedor, .page, .content {
+  max-width: min(var(--zt-container-max), 96vw);
+}
+
+/* Grids comunes de catálogo+carrito (ajusta según tus clases reales) */
+.grid, .layout, .main-grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* Si ya tenías grid, solo fuerza columnas amplias en desktop */
+@media (min-width: 1001px){
+  .grid, .layout, .main-grid { grid-template-columns: 1.9fr 1fr; align-items: start; }
+}
+
+/* Carrito sticky típico */
+.cart, .carrito, aside.cart, #cart, .cart-panel {
+  position: sticky;
+  top: 16px;
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+}
+
+/* Catálogo con más columnas cuando hay espacio */
+.products, .catalog, .grid-products, .cards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Móvil: una columna y carrito normal */
+@media (max-width: 1000px){
+  .grid, .layout, .main-grid { grid-template-columns: 1fr; }
+  .cart, .carrito, aside.cart, #cart, .cart-panel {
+    position: static; max-height: none; overflow: visible;
+  }
+}
